@@ -35,5 +35,5 @@
     "erasableSyntaxOnly": true
   },
 
-  "include": ["src", "../server/src/models/Event.model.ts"]
+  "include": ["src"]
 }
