@@ -1,33 +1,46 @@
-import Event from "../../../server/src/models/Event.model";
+const API_BASE = '/api/events';
 
 // GET ALL
 export const getAllEvents = async () => {
-  return await Event.find().sort({
-    date: 1,
-  });
+  const res = await fetch(`${API_BASE}`);
+  if (!res.ok) throw new Error('Failed to fetch events');
+  return res.json();
 };
 
 // GET ONE
 export const getEventById = async (id: string) => {
-  return await Event.findById(id);
+  const res = await fetch(`${API_BASE}/${id}`);
+  if (!res.ok) throw new Error('Failed to fetch event');
+  return res.json();
 };
 
 // CREATE
 export const createEventService = async (data: any) => {
-  return await Event.create(data);
+  const res = await fetch(`${API_BASE}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error('Failed to create event');
+  return res.json();
 };
 
 // UPDATE
-export const updateEventService = async (
-  id: string,
-  data: any
-) => {
-  return await Event.findByIdAndUpdate(id, data, {
-    new: true,
+export const updateEventService = async (id: string, data: any) => {
+  const res = await fetch(`${API_BASE}/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
   });
+  if (!res.ok) throw new Error('Failed to update event');
+  return res.json();
 };
 
 // DELETE
 export const deleteEventService = async (id: string) => {
-  return await Event.findByIdAndDelete(id);
+  const res = await fetch(`${API_BASE}/${id}`, {
+    method: 'DELETE',
+  });
+  if (!res.ok) throw new Error('Failed to delete event');
+  return res.json();
 };
