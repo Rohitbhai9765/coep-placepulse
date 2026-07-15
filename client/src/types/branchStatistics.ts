@@ -10,4 +10,6 @@ export interface BranchStatistics {
   highestPackage: number;
 
   averagePackage: number;
+
+  companiesPlacedIn: string[];
 }

@@ -111,28 +111,30 @@ const AdminCompanies = () => {
 
             {companies.map((company) => (
 
+
+
               <tr
                 key={company._id}
                 className="border-t border-zinc-800"
               >
 
-                <td className="p-4">
+                <td className="p-4 whitespace-nowrap">
                   {company.name}
                 </td>
 
-                <td className="p-4">
+                <td className="p-4 whitespace-nowrap">
                   {company.role}
                 </td>
 
-                <td className="p-4">
+                <td className="p-4 whitespace-nowrap">
                   {company.package}
                 </td>
 
-                <td className="p-4">
+                <td className="p-4 whitespace-nowrap">
                   {company.status}
                 </td>
 
-                <td className="p-4">
+                <td className="p-4 whitespace-nowrap">
 
                   <div className="flex justify-end gap-3">
 

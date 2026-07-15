@@ -20,6 +20,7 @@ import AdminAnnouncementManagement from "@/pages/AdminAnnouncementManagement";
 import EditAnnouncement from "@/pages/EditAnnouncement";
 
 import Calendar from "@/pages/Calendar";
+import BranchAnalysis from "@/pages/BranchAnalysis";
 import AdminCalendar from "@/pages/AdminCalendar";
 import EditEvent from "@/pages/EditEvent";
 
@@ -49,12 +50,20 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Dashboard />,
+        element: (
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        ),
       },
 
       {
         path: "dashboard",
-        element: <Dashboard />,
+        element: (
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        ),
       },
 
       // =======================
@@ -107,6 +116,16 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <Statistics />
+          </ProtectedRoute>
+        ),
+      },
+
+      {
+        path: "branch-analysis",
+
+        element: (
+          <ProtectedRoute>
+            <BranchAnalysis />
           </ProtectedRoute>
         ),
       },
@@ -289,10 +308,10 @@ export const router = createBrowserRouter([
         ),
       },
 
-    
 
 
-      
+
+
 
     ],
   },

@@ -102,6 +102,19 @@ export const getBranchStatistics = async () => {
         averagePackage: {
           $avg: "$package",
         },
+
+        companiesPlacedIn: {
+          $addToSet: {
+            $cond: [
+              { $and: [
+                { $eq: ["$placementStatus", "Placed"] },
+                { $ne: ["$placedCompany", ""] }
+              ]},
+              "$placedCompany",
+              null
+            ]
+          }
+        }
       },
     },
 
@@ -112,30 +125,37 @@ export const getBranchStatistics = async () => {
     },
   ]);
 
-  return data.map((branch) => ({
-    branch: branch._id,
+  return data.map((branch) => {
+    // Remove null from the companies array
+    const companies = branch.companiesPlacedIn.filter((c: any) => c !== null);
 
-    totalStudents: branch.totalStudents,
+    return {
+      branch: branch._id,
 
-    placedStudents: branch.placedStudents,
+      totalStudents: branch.totalStudents,
 
-    placementPercentage:
-      branch.totalStudents === 0
-        ? 0
-        : Number(
-            (
-              (branch.placedStudents /
-                branch.totalStudents) *
-              100
-            ).toFixed(2)
-          ),
+      placedStudents: branch.placedStudents,
 
-    highestPackage: branch.highestPackage,
+      placementPercentage:
+        branch.totalStudents === 0
+          ? 0
+          : Number(
+              (
+                (branch.placedStudents /
+                  branch.totalStudents) *
+                100
+              ).toFixed(2)
+            ),
 
-    averagePackage: Number(
-      (branch.averagePackage || 0).toFixed(2)
-    ),
-  }));
+      highestPackage: branch.highestPackage,
+
+      averagePackage: Number(
+        (branch.averagePackage || 0).toFixed(2)
+      ),
+
+      companiesPlacedIn: companies,
+    };
+  });
 };
 
 export const getPackageDistribution = async () => {

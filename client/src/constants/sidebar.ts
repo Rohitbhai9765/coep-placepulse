@@ -15,6 +15,12 @@ export const sidebarItems = [
   },
 
   {
+    title: "Branch Analysis",
+    path: "/branch-analysis",
+    icon: BarChart3,
+  },
+
+  {
     title: "Companies",
     path: "/companies",
     icon: Building2,
@@ -49,6 +55,7 @@ export const sidebarItems = [
     path: "/calendar",
     icon: CalendarDays,
   },
+
 
 
   {

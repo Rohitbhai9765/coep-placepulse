@@ -2,14 +2,12 @@ import {
   Building2,
   Users,
   CalendarDays,
-  IndianRupee,
   Plus,
   Megaphone,
   BarChart3,
   ChartNoAxesCombined,
 } from "lucide-react";
 
-import AdminStat from "@/components/admin/AdminStat";
 import QuickAction from "@/components/admin/QuickAction";
 
 const Dashboard = () => {
@@ -28,37 +26,7 @@ const Dashboard = () => {
 
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
 
-        <AdminStat
-          title="Companies"
-          value="86"
-          icon={Building2}
-          color="bg-violet-600/20 text-violet-400"
-        />
-
-        <AdminStat
-          title="Students"
-          value="1420"
-          icon={Users}
-          color="bg-emerald-600/20 text-emerald-400"
-        />
-
-        <AdminStat
-          title="Upcoming Drives"
-          value="24"
-          icon={CalendarDays}
-          color="bg-blue-600/20 text-blue-400"
-        />
-
-        <AdminStat
-          title="Average Package"
-          value="₹18.2 LPA"
-          icon={IndianRupee}
-          color="bg-orange-600/20 text-orange-400"
-        />
-
-      </div>
 
       <div>
 

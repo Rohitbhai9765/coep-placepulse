@@ -14,6 +14,11 @@ export const studentSidebarItems = [
     icon: LayoutDashboard,
   },
   {
+    title: "Branch Analysis",
+    path: "/branch-analysis",
+    icon: BarChart3,
+  },
+  {
     title: "Companies",
     path: "/companies",
     icon: Building2,
@@ -33,6 +38,7 @@ export const studentSidebarItems = [
     path: "/statistics",
     icon: BarChart3,
   },
+
   {
     title: "My Profile",
     path: "/student/profile",

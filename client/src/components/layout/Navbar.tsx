@@ -1,4 +1,5 @@
-import { Bell, Moon, Search, LogOut, Menu } from "lucide-react";
+import { useState } from "react";
+import { Bell, Moon, Search, LogOut, Menu, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 import { useAuth } from "@/context/AuthContext";
@@ -10,6 +11,7 @@ interface NavbarProps {
 
 const Navbar = ({ isSidebarOpen, onMenuClick }: NavbarProps) => {
   const navigate = useNavigate();
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const { user, logout } = useAuth();
 
@@ -23,23 +25,30 @@ const Navbar = ({ isSidebarOpen, onMenuClick }: NavbarProps) => {
 
       {/* Search */}
 
-      <div className="flex min-w-0 flex-1 items-center gap-3">
+      <div className={`flex flex-1 items-center gap-3 ${isSearchOpen ? "absolute inset-0 z-50 bg-[#09090B] px-4" : ""}`}>
         <button
           type="button"
           aria-label="Open navigation"
           aria-controls="main-navigation"
           aria-expanded={isSidebarOpen}
           onClick={onMenuClick}
-          className="rounded-xl border border-zinc-800 bg-zinc-900 p-2.5 text-zinc-200 transition hover:border-violet-500 lg:hidden"
+          className={`rounded-xl border border-zinc-800 bg-zinc-900 p-2.5 text-zinc-200 transition hover:border-violet-500 lg:hidden ${isSearchOpen ? "hidden" : ""}`}
         >
           <Menu size={20} />
         </button>
 
-        <span className="hidden text-base font-semibold text-white sm:inline lg:hidden">
+        <span className={`hidden text-base font-semibold text-white sm:inline lg:hidden ${isSearchOpen ? "!hidden" : ""}`}>
           PlacePulse
         </span>
 
-        <div className="relative hidden w-full max-w-[420px] md:block">
+        <button
+          onClick={() => setIsSearchOpen(!isSearchOpen)}
+          className={`rounded-xl border border-zinc-800 bg-zinc-900 p-2.5 text-zinc-200 transition hover:border-violet-500 md:hidden ${isSearchOpen ? "ml-auto" : ""}`}
+        >
+          {isSearchOpen ? <X size={20} /> : <Search size={20} />}
+        </button>
+
+        <div className={`relative w-full max-w-[420px] ${isSearchOpen ? "block" : "hidden md:block"}`}>
 
           <Search
             size={18}
@@ -57,7 +66,7 @@ const Navbar = ({ isSidebarOpen, onMenuClick }: NavbarProps) => {
 
       {/* Right Section */}
 
-      <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+      <div className={`flex shrink-0 items-center gap-2 sm:gap-3 ${isSearchOpen ? "hidden" : ""}`}>
 
         <button
           type="button"

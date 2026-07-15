@@ -1,4 +1,5 @@
 import Dashboard from "../models/Dashboard.model";
+import { getDashboardStatistics } from "./statistics.service";
 
 // ============================
 // GET DASHBOARD
@@ -18,28 +19,23 @@ export const getDashboardService = async () => {
 
       description:
         "Empowering students with opportunities and connecting them with leading recruiters.",
-
-      studentsPlaced: 286,
-
-      studentsPlacedChange: "+12 Today",
-
-      companiesVisited: 63,
-
-      companiesVisitedChange: "+2 This Week",
-
-      highestPackage: "52 LPA",
-
-      highestPackageLabel: "Highest",
-
-      averagePackage: "14.8 LPA",
-
-      averagePackageChange: "+1.4 LPA",
-
     });
 
   }
 
-  return dashboard;
+  const dynamicStats = await getDashboardStatistics();
+
+  return {
+    ...dashboard.toObject(),
+    studentsPlaced: dynamicStats.placedStudents,
+    studentsPlacedChange: "+0 Today", // Could be computed dynamically in the future
+    companiesVisited: dynamicStats.companies,
+    companiesVisitedChange: "+0 This Week",
+    highestPackage: `${dynamicStats.highestPackage} LPA`,
+    highestPackageLabel: "Highest",
+    averagePackage: `${dynamicStats.averagePackage} LPA`,
+    averagePackageChange: "+0.0 LPA",
+  };
 
 };
 

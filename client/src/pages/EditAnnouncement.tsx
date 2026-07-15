@@ -15,20 +15,14 @@ const EditAnnouncement = () => {
     useState<Announcement | null>(null);
 
   useEffect(() => {
+    const fetchAnnouncement = async () => {
+      if (!id) return;
+      const data = await getAnnouncement(id);
+      setAnnouncement(data);
+    };
 
     fetchAnnouncement();
-
-  }, []);
-
-  const fetchAnnouncement = async () => {
-
-    if (!id) return;
-
-    const data = await getAnnouncement(id);
-
-    setAnnouncement(data);
-
-  };
+  }, [id]);
 
   if (!announcement) {
 
