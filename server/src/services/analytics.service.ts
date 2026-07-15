@@ -1,6 +1,7 @@
 import Student from "../models/Student.model";
 import Company from "../models/Company.model";
 import Event from "../models/Event.model";
+import Analytics from "../models/Analytics.model";
 
 // ============================
 // GET ANALYTICS
